@@ -41,3 +41,20 @@ The project is organized as a Monorepo:
 ## 6. Integrations & Market Specifics
 - **Payments:** VietQR dynamic generation. Handle webhooks from PayOS/SePay securely. Ensure idempotency via a unique invoice/appointment ID check before updating `paymentStatus`.
 - **Timezone:** Keep in mind that customers and shops operate in **GMT+7**. Handle all conversions properly when querying database DateTime ranges.
+
+## 7. Testing Guidelines (Jest)
+- **Framework:** Use `jest` (and `ts-jest` for TypeScript compilation) as the primary testing framework across the workspace.
+- **File Naming Conventions:**
+  - Unit tests: `*.spec.ts` or `*.spec.tsx` placed adjacent to the file being tested.
+  - Integration/E2E tests: `*.e2e-spec.ts` inside a dedicated `test/` directory.
+- **Isolation & Mocking:**
+  - **Database:** Never hit the real PostgreSQL database during unit tests. Always mock the `PrismaClient`. Use `jest-mock-extended` to create deep mocks of the Prisma service.
+  - **External Dependencies:** External services (PayOS, Zalo API, BullMQ/Redis) must be strictly mocked or stubbed. Test the logic handles both success and failure HTTP/Network statuses.
+- **State Cleanliness:** Ensure tests are completely isolated and stateless. Always clear or reset mocks in `beforeEach()` or `afterEach()` using `jest.clearAllMocks()`.
+- **Descriptive Structure (BDD Style):**
+  - Use clear, descriptive nesting with `describe` and `it`/`test` blocks.
+  - Naming pattern: `describe('MethodName', () => { it('should [expected outcome] when [given scenario]', async () => { ... }) })`.
+- **High-Priority Test Targets:** Ensure 100% test coverage for core business constraints:
+  - Booking availability slot generation algorithms.
+  - Race condition handles (the double-booking prevention logic).
+  - Webhook payload signature validation and idempotency checks.
