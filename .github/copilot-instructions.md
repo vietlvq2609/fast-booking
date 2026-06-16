@@ -24,7 +24,8 @@ The project is organized as a Monorepo:
 
 ## 4. Backend Guidelines (NestJS & Prisma)
 - **Architecture:** Follow NestJS Modular Architecture (Module, Controller, Service). Use Dependency Injection properly.
-- **Concurrency Control:** For booking creation, always use **Prisma Transactions** (`prisma.$transaction`) or pessimistic locking mechanisms to avoid double-booking on the exact same `staffId` and `startTime`.
+- **Database Access:** Use `drizzle-orm` with `postgres` driver exported from `@repo/database`. Inject the `db` client provider properly into NestJS modules.
+- **Concurrency Control:** For booking creation, utilize Drizzle's `db.transaction()` to apply pessimistic locking (`.for('update')`) or serializable isolation levels to prevent double-booking on identical `staffId` and `startTime`.
 - **Authentication:** JWT-based Guard. Implement Role-Based Access Control (RBAC) with roles: `SUPER_ADMIN`, `SHOP_OWNER`, `SHOP_MANAGER`, `STAFF`.
 - **Queues:** Use `BullMQ` (Redis) for heavy or delayed asynchronous tasks (e.g., sending Zalo ZNS reminders, processing payment webhooks). Never process these directly inside the HTTP request lifecycle.
 
