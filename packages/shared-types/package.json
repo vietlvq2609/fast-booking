@@ -1,0 +1,19 @@
+{
+  "name": "@fast-booking/shared-types",
+  "version": "0.1.0",
+  "description": "Shared TypeScript types and Zod validation schemas for Fast Booking",
+  "private": true,
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "rimraf dist",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {}
+}

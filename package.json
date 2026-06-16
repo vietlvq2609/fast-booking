@@ -19,10 +19,15 @@
     "deps": "turbo run deps",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
+    "db:generate": "pnpm --filter @fast-booking/database db:generate",
+    "db:migrate": "pnpm --filter @fast-booking/database db:migrate",
     "db:studio": "pnpm --filter @fast-booking/database db:studio"
   },
   "devDependencies": {
-    "turbo": "^2.0.0"
+    "@types/node": "^20.14.0",
+    "rimraf": "^5.0.7",
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.5"
   },
   "pnpm": {
     "overrides": {},
