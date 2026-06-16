@@ -1,0 +1,30 @@
+{
+  "name": "fast-booking",
+  "version": "1.0.0",
+  "description": "Multi-Tenant Booking & CRM SaaS for local businesses",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18.17.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "clean": "turbo clean && rm -rf node_modules",
+    "deps": "turbo run deps"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0"
+  },
+  "pnpm": {
+    "overrides": {},
+    "peerDependencyRules": {
+      "ignoreMissing": []
+    }
+  }
+}
