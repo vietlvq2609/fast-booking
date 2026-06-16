@@ -16,7 +16,10 @@
     "lint": "turbo run lint",
     "format": "turbo run format",
     "clean": "turbo clean && rm -rf node_modules",
-    "deps": "turbo run deps"
+    "deps": "turbo run deps",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:studio": "pnpm --filter @fast-booking/database db:studio"
   },
   "devDependencies": {
     "turbo": "^2.0.0"
